@@ -1,0 +1,10 @@
+.tabla{
+    margin: 12px;
+}
+*{
+    background-color: aquamarine;
+}
+
+tr{
+    background-color: blue;
+}
