@@ -3,7 +3,7 @@ import mysql.connector
 import datetime
 
 #connection to database
-coneccion = mysql.connector.connect(user='root', password='193243up', host='127.0.0.1', database='CS1')
+coneccion = mysql.connector.connect(user='root', password='root', host='localhost', database='CS1', port=8889)
 
 print(coneccion)
 
@@ -11,7 +11,7 @@ print(coneccion)
 cursor=coneccion.cursor()
 
 #sql command
-add_all=("INSERT INTO sniff(mac_src,mac_des,ip_src,tam_src,ip_des,tam_des,date_time) VALUES (%s,%s,%s,%s,%s,%s,%s)")
+add_all=("INSERT INTO sniff(mac_src,mac_des,ip_src,tam_src,ip_des,tam_des) VALUES (%s,%s,%s,%s,%s,%s)")
 
 # callback function - called for every packet
 def traffic_monitor_callbak(pkt):
@@ -27,7 +27,7 @@ def traffic_monitor_callbak(pkt):
 
        
 #get the current date and time
-        now = datetime.datetime.now() 
+        """ now = datetime.datetime.now()  """
 
 #print on console the data got  from the sniffers
         print (ip_src)
@@ -36,10 +36,10 @@ def traffic_monitor_callbak(pkt):
         print (tam_ip_des)
         print (mac_src)
         print (mac_des)
-        print (now)
+        """ print (now) """
 
 #commit the data to db
-        cursor.execute(add_all, (mac_src,mac_des,ip_src,tam_ip_src,ip_des,tam_ip_des,now,))
+        cursor.execute(add_all, (mac_src,mac_des,ip_src,tam_ip_src,ip_des,tam_ip_des))
         coneccion.commit()
 
 # capture traffic
